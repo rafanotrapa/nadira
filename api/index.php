@@ -139,11 +139,11 @@ function format_date(string $iso): string {
     </div>
 
     <!-- Quote banner -->
-    <div class="hero-banner" role="complementary" aria-label="Kutipan advokasi">
+    <div class="hero-banner" role="complementary" aria-label="Advocacy quote">
         <div class="hero-banner-inner">
             <blockquote>
-                "Suara remaja bukan sekadar bisikan masa depan &mdash;
-                ia adalah <span>kekuatan yang mengubah</span> hari ini."
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit &mdash;
+                sed do eiusmod <span>tempor incididunt</span> ut labore."
             </blockquote>
         </div>
     </div>
