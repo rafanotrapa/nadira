@@ -11,7 +11,7 @@
 declare(strict_types=1);
 
 // Load article data — returns an array of article definitions
-$articles = require __DIR__ . '/data/articles.php';
+$articles = require __DIR__ . '/../data/articles.php';
 
 // Utility: encode article data for safe embedding in HTML data-* attributes
 function encode_data(mixed $value): string {
