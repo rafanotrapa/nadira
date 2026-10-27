@@ -49,7 +49,15 @@ function format_date(string $iso): string {
 
     <link rel="stylesheet" href="/assets/css/style.css">
 </head>
-<body>
+<body class="loading">
+
+<!-- Loading Intro -->
+<div class="intro-overlay">
+    <h1 class="intro-text">
+        <span>N</span><span>a</span><span>d</span><span>i</span><span>r</span><span>a</span> 
+        <span>B</span><span>r</span><span>i</span><span>t</span><span>a</span><span>n</span><span>i</span><span>a</span>
+    </h1>
+</div>
 
 <!-- ============================================================
      NAVIGATION

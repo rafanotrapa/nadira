@@ -3,16 +3,33 @@
  * Nadira Britania Portfolio — Vanilla JS
  *
  * Responsibilities:
- *   1. Mobile nav hamburger toggle + drawer
- *   2. Article modal open / close (click card, keyboard, backdrop)
- *   3. Gallery lightbox (image expand on click)
- *   4. Scroll-reveal using IntersectionObserver
- *   5. Active nav link highlight on scroll
- *   6. Smooth scroll for anchor links
+ *   1. Intro overlay animation with letter reveal
+ *   2. Mobile nav hamburger toggle + drawer
+ *   3. Article modal open / close (click card, keyboard, backdrop)
+ *   4. Gallery lightbox (image expand on click)
+ *   5. Scroll-reveal using IntersectionObserver
+ *   6. Active nav link highlight on scroll
+ *   7. Smooth scroll for anchor links
  */
 
 (function () {
     'use strict';
+
+    /* -------------------------------------------------------------------------
+       0. INTRO OVERLAY ANIMATION
+       ---------------------------------------------------------------------- */
+
+    window.addEventListener('load', function () {
+        const introOverlay = document.querySelector('.intro-overlay');
+        if (introOverlay) {
+            setTimeout(function () {
+                document.body.classList.add('loaded');
+                setTimeout(function () {
+                    introOverlay.remove();
+                }, 800);
+            }, 2800);
+        }
+    });
 
     /* -------------------------------------------------------------------------
        1. MOBILE NAVIGATION
