@@ -131,7 +131,7 @@ function format_date(string $iso): string {
 
         <!-- Right: Hero portrait image -->
         <div class="hero-image-wrap" role="img" aria-label="Official portrait">
-            <img src="https://images.unsplash.com/photo-1602789658195-14a88c9fa4db?auto=format&fit=crop&w=1200&q=80"
+            <img src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=1200"
                  alt="Confident young woman with bright smile"
                  width="720" height="960" loading="eager" fetchpriority="high">
         </div>
@@ -388,32 +388,32 @@ function format_date(string $iso): string {
                     [
                         'label' => 'Official Portrait',
                         'caption' => 'Official Portrait, 2026',
-                        'src' => 'https://images.unsplash.com/photo-1560253023-3ec5d502959f?auto=format&fit=crop&w=1000&q=80'
+                        'src' => 'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=1000'
                     ],
                     [
                         'label' => 'Advocacy Event',
                         'caption' => 'Youth Empowerment Forum',
-                        'src' => 'https://images.unsplash.com/photo-1529390700576-925672326756?auto=format&fit=crop&w=1000&q=80'
+                        'src' => 'https://images.pexels.com/photos/3807517/pexels-photo-3807517.jpeg?auto=compress&cs=tinysrgb&w=1000'
                     ],
                     [
                         'label' => 'Pageant Stage',
                         'caption' => 'Pageant Performance',
-                        'src' => 'https://images.unsplash.com/photo-1595225476474-875d5983c273?auto=format&fit=crop&w=1000&q=80'
+                        'src' => 'https://images.pexels.com/photos/1181690/pexels-photo-1181690.jpeg?auto=compress&cs=tinysrgb&w=1000'
                     ],
                     [
                         'label' => 'Community Outreach',
                         'caption' => 'Volunteer Work',
-                        'src' => 'https://images.unsplash.com/photo-1545167622351-245b8ec5ca08?auto=format&fit=crop&w=1000&q=80'
+                        'src' => 'https://images.pexels.com/photos/3807748/pexels-photo-3807748.jpeg?auto=compress&cs=tinysrgb&w=1000'
                     ],
                     [
                         'label' => 'Campus Life',
                         'caption' => 'Student Activities',
-                        'src' => 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1000&q=80'
+                        'src' => 'https://images.pexels.com/photos/3807517/pexels-photo-3807517.jpeg?auto=compress&cs=tinysrgb&w=1000'
                     ],
                     [
                         'label' => 'Editorial Shoot',
                         'caption' => 'Media Feature',
-                        'src' => 'https://images.unsplash.com/photo-1622279531435-8c11138a5813?auto=format&fit=crop&w=1000&q=80'
+                        'src' => 'https://images.pexels.com/photos/1181690/pexels-photo-1181690.jpeg?auto=compress&cs=tinysrgb&w=1000'
                     ],
                 ];
             ?>
