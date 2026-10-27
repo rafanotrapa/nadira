@@ -950,24 +950,7 @@ body.loaded .intro-overlay {
     transition: opacity 1s cubic-bezier(0.7, 0, 0.3, 1);
 }
 
-/* Intro Animation - Pull to Hero (CANVA Smart Animate style) */
-body.intro-exiting .intro-overlay {
-    animation: pullToHero 0.8s cubic-bezier(0.7, 0, 0.3, 1) forwards;
-}
 
-@keyframes pullToHero {
-    0% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(0.5);
-        opacity: 0.5;
-    }
-    100% {
-        transform: scale(0);
-        opacity: 0;
-    }
-}
 
 /* ---------------------------------------------------------------------------
    11. REVEAL ANIMATIONS
