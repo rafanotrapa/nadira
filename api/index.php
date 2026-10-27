@@ -55,7 +55,7 @@ function format_date(string $iso): string {
 <div class="intro-overlay">
     <h1 class="intro-text">
         <span>N</span><span>a</span><span>d</span><span>i</span><span>r</span><span>a</span> 
-        <span>B</span><span>r</span><span>i</span><span>t</span><span>a</span><span>n</span><span>i</span><span>a</span>
+        <span class="name-accent">B</span><span class="name-accent">r</span><span class="name-accent">i</span><span class="name-accent">t</span><span class="name-accent">a</span><span class="name-accent">n</span><span class="name-accent">i</span><span class="name-accent">a</span>
     </h1>
 </div>
 
@@ -120,8 +120,8 @@ function format_date(string $iso): string {
             </div>
 
             <h1 class="hero-name">
-                Nadira
-                <em>Britania</em>
+                <span class="name-part">Nadira</span>
+                <em class="name-accent">Britania</em>
             </h1>
 
             <p class="hero-title">

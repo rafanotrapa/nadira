@@ -922,12 +922,7 @@ body.loaded { overflow: auto !important; height: auto !important; }
     pointer-events: none;
 }
 
-.intro-text span {
-    display: inline-block;
-    opacity: 0;
-    transform: translateY(20px);
-    animation: fadeInSlide 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
+.intro-text span.name-accent { color: var(--color-accent); }
 
 @keyframes fadeInSlide {
     to { opacity: 1; transform: translateY(0); }
@@ -940,7 +935,6 @@ body.loaded { overflow: auto !important; height: auto !important; }
 .intro-text span:nth-child(4) { animation-delay: 0.25s; }
 .intro-text span:nth-child(5) { animation-delay: 0.3s; }
 .intro-text span:nth-child(6) { animation-delay: 0.35s; }
-/* Space for "Nadira " */
 .intro-text span:nth-child(8) { animation-delay: 0.5s; }
 .intro-text span:nth-child(9) { animation-delay: 0.55s; }
 .intro-text span:nth-child(10) { animation-delay: 0.6s; }
@@ -954,6 +948,25 @@ body.loaded .intro-overlay {
     opacity: 0; 
     pointer-events: none;
     transition: opacity 1s cubic-bezier(0.7, 0, 0.3, 1);
+}
+
+/* Intro Animation - Pull to Hero (CANVA Smart Animate style) */
+body.intro-exiting .intro-overlay {
+    animation: pullToHero 0.8s cubic-bezier(0.7, 0, 0.3, 1) forwards;
+}
+
+@keyframes pullToHero {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(0.5);
+        opacity: 0.5;
+    }
+    100% {
+        transform: scale(0);
+        opacity: 0;
+    }
 }
 
 /* ---------------------------------------------------------------------------
