@@ -464,7 +464,6 @@ function format_date(string $iso): string {
                 <p class="footer-brand">Nadira <span>Britania</span></p>
                 <p class="footer-tagline">
                     Finalist Miss Teenager Indonesia 2026 representing West Sumatra.
-                    Youth empowerment and social impact advocate.
                 </p>
             </div>
 
@@ -530,7 +529,7 @@ function format_date(string $iso): string {
 
         <div class="footer-bottom">
             <p class="footer-copy">
-                &copy; <?= date('Y') ?> Nadira Britania. Made with dedication.
+                &copy; <?= date('Y') ?> Nadira Britania.
             </p>
             <p class="footer-rep">
                 Miss Teenager Indonesia 2026 — West Sumatra Representative
