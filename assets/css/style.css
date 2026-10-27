@@ -899,26 +899,34 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
     letter-spacing: 0.04em;
 }
 
-/* Loading Intro */
+/* Fix Scroll Bug */
+body.loading { overflow: hidden !important; height: 100vh !important; }
+body.loaded { overflow: auto !important; height: auto !important; }
+
+/* Intro Overlay - Matches Hero Styling */
 .intro-overlay {
     position: fixed; inset: 0;
     background-color: var(--color-bg);
     display: flex; align-items: center; justify-content: center;
     z-index: 9999;
-    transition: opacity 0.8s ease;
+    transition: opacity 1s cubic-bezier(0.7, 0, 0.3, 1);
 }
 
 .intro-text {
-    font-family: var(--font-display);
-    font-size: clamp(2rem, 8vw, 5rem);
+    font-family: var(--font-display); /* Cormorant Garamond */
+    font-size: clamp(3rem, 10vw, 7rem); /* Matches Hero Name size */
+    font-weight: 700;
     color: var(--color-text);
+    letter-spacing: -0.03em;
+    line-height: 0.95;
+    pointer-events: none;
 }
 
 .intro-text span {
     display: inline-block;
     opacity: 0;
     transform: translateY(20px);
-    animation: fadeInSlide 0.5s forwards;
+    animation: fadeInSlide 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 @keyframes fadeInSlide {
@@ -932,17 +940,21 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 .intro-text span:nth-child(4) { animation-delay: 0.25s; }
 .intro-text span:nth-child(5) { animation-delay: 0.3s; }
 .intro-text span:nth-child(6) { animation-delay: 0.35s; }
-.intro-text span:nth-child(8) { animation-delay: 0.45s; }
-.intro-text span:nth-child(9) { animation-delay: 0.5s; }
-.intro-text span:nth-child(10) { animation-delay: 0.55s; }
-.intro-text span:nth-child(11) { animation-delay: 0.6s; }
-.intro-text span:nth-child(12) { animation-delay: 0.65s; }
-.intro-text span:nth-child(13) { animation-delay: 0.7s; }
-.intro-text span:nth-child(14) { animation-delay: 0.75s; }
-.intro-text span:nth-child(15) { animation-delay: 0.8s; }
+/* Space for "Nadira " */
+.intro-text span:nth-child(8) { animation-delay: 0.5s; }
+.intro-text span:nth-child(9) { animation-delay: 0.55s; }
+.intro-text span:nth-child(10) { animation-delay: 0.6s; }
+.intro-text span:nth-child(11) { animation-delay: 0.65s; }
+.intro-text span:nth-child(12) { animation-delay: 0.7s; }
+.intro-text span:nth-child(13) { animation-delay: 0.75s; }
+.intro-text span:nth-child(14) { animation-delay: 0.8s; }
+.intro-text span:nth-child(15) { animation-delay: 0.85s; }
 
-body.loading { overflow: hidden; }
-body.loaded .intro-overlay { opacity: 0; pointer-events: none; }
+body.loaded .intro-overlay { 
+    opacity: 0; 
+    pointer-events: none;
+    transition: opacity 1s cubic-bezier(0.7, 0, 0.3, 1);
+}
 
 /* ---------------------------------------------------------------------------
    11. REVEAL ANIMATIONS

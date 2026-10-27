@@ -23,11 +23,15 @@
         const introOverlay = document.querySelector('.intro-overlay');
         if (introOverlay) {
             setTimeout(function () {
+                document.body.classList.remove('loading');
                 document.body.classList.add('loaded');
                 setTimeout(function () {
                     introOverlay.remove();
-                }, 800);
+                }, 1000);
             }, 2800);
+        } else {
+            document.body.classList.remove('loading');
+            document.body.classList.add('loaded');
         }
     });
 
