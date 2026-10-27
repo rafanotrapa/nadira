@@ -139,8 +139,8 @@ function format_date(string $iso): string {
 
         <!-- Right: Hero portrait image -->
         <div class="hero-image-wrap" role="img" aria-label="Official portrait">
-            <img src="https://images.pexels.com/photos/1181690/pexels-photo-1181690.jpeg?auto=compress&cs=tinysrgb&w=1200&h=1600&fit=crop"
-                 alt="Professional portrait of young woman"
+            <img src="/assets/img/hero.jpg"
+                 alt="Nadira Britania — Miss Teenager Indonesia 2026"
                  width="720" height="960" loading="eager" fetchpriority="high">
         </div>
 
@@ -394,34 +394,34 @@ function format_date(string $iso): string {
             <?php
                 $gallery_items = [
                     [
-                        'label' => 'Official Portrait',
-                        'caption' => 'Official Portrait, 2026',
-                        'src' => 'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=1000'
+                        'label' => 'Pageant Performance',
+                        'caption' => 'Miss Teenager Indonesia 2026',
+                        'src' => 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1000&q=80'
                     ],
                     [
-                        'label' => 'Advocacy Event',
-                        'caption' => 'Youth Empowerment Forum',
-                        'src' => 'https://images.pexels.com/photos/3807517/pexels-photo-3807517.jpeg?auto=compress&cs=tinysrgb&w=1000'
+                        'label' => 'Advocacy Forum',
+                        'caption' => 'Youth Empowerment Event',
+                        'src' => 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&w=1000&q=80'
                     ],
                     [
-                        'label' => 'Pageant Stage',
-                        'caption' => 'Pageant Performance',
-                        'src' => 'https://images.pexels.com/photos/1181690/pexels-photo-1181690.jpeg?auto=compress&cs=tinysrgb&w=1000'
+                        'label' => 'Editorial Shoot',
+                        'caption' => 'Fashion Feature',
+                        'src' => 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1000&q=80'
                     ],
                     [
                         'label' => 'Community Outreach',
                         'caption' => 'Volunteer Work',
-                        'src' => 'https://images.pexels.com/photos/3807748/pexels-photo-3807748.jpeg?auto=compress&cs=tinysrgb&w=1000'
+                        'src' => 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=1000&q=80'
                     ],
                     [
                         'label' => 'Campus Life',
                         'caption' => 'Student Activities',
-                        'src' => 'https://images.pexels.com/photos/3807517/pexels-photo-3807517.jpeg?auto=compress&cs=tinysrgb&w=1000'
+                        'src' => 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=1000&q=80'
                     ],
                     [
-                        'label' => 'Editorial Shoot',
-                        'caption' => 'Media Feature',
-                        'src' => 'https://images.pexels.com/photos/1181690/pexels-photo-1181690.jpeg?auto=compress&cs=tinysrgb&w=1000'
+                        'label' => 'Media Coverage',
+                        'caption' => 'Press Feature',
+                        'src' => 'https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=1000&q=80'
                     ],
                 ];
             ?>
