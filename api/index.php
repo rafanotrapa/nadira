@@ -130,25 +130,10 @@ function format_date(string $iso): string {
         </div>
 
         <!-- Right: Hero portrait image -->
-        <div class="hero-image-wrap" role="img" aria-label="Foto resmi Nadira Britania">
-            <!--
-                TODO: Replace with Nadira's official portrait photo.
-                Recommended: 720x960px, high-quality JPEG or WebP.
-                Focal point: top-center (face and upper body).
-
-                Example with a real image:
-                <img src="/assets/img/nadira-hero.jpg"
-                     alt="Nadira Britania dalam balutan busana resmi Miss Teenager Indonesia 2026"
-                     width="720" height="960" loading="eager" fetchpriority="high">
-            -->
-            <div class="hero-img-placeholder" aria-hidden="true">
-                <svg width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden="true">
-                    <rect x="1" y="1" width="46" height="46" rx="2" stroke="#B86B53" stroke-width="1.5" stroke-dasharray="4 3"/>
-                    <circle cx="24" cy="18" r="7" stroke="#B86B53" stroke-width="1.5"/>
-                    <path d="M8 44c0-8.837 7.163-16 16-16s16 7.163 16 16" stroke="#B86B53" stroke-width="1.5" stroke-linecap="round"/>
-                </svg>
-                <p>Foto Resmi &mdash; [TAMBAHKAN GAMBAR]</p>
-            </div>
+        <div class="hero-image-wrap" role="img" aria-label="Official portrait">
+            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1200&q=85"
+                 alt="Editorial fashion portrait"
+                 width="720" height="960" loading="eager" fetchpriority="high">
         </div>
 
     </div>
@@ -183,18 +168,18 @@ function format_date(string $iso): string {
                 </h2>
 
                 <p>
-                    I am <strong>Nadira Britania</strong>, a student at <strong>[Your Campus / University]</strong>
-                    who believes that platform comes with purpose.
-                    As a Finalist for Miss Teenager Indonesia 2026 representing West Sumatra,
-                    I aim to represent both regional pride and youth empowerment.
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
                 </p>
 
                 <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+                    Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                 </p>
 
                 <p>
-                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, 
+                    totam rem aperiam eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
                 </p>
             </div>
 
@@ -396,16 +381,40 @@ function format_date(string $iso): string {
               Slot 3: 540x500px (square-ish)
               Slot 4-6: 480x420px (supporting)
         -->
-        <div class="gallery-grid" role="list" aria-label="Galeri foto Nadira Britania">
+        <div class="gallery-grid" role="list" aria-label="Gallery photos">
 
             <?php
                 $gallery_items = [
-                    ['label' => 'Official Portrait 2026',    'caption' => 'Official Portrait, 2026'],
-                    ['label' => 'Advocacy Event', 'caption' => 'Advocacy Forum, West Sumatra'],
-                    ['label' => 'Pageant Finals',             'caption' => 'Miss Teenager Indonesia 2026 Finals'],
-                    ['label' => 'Campus Activities',                 'caption' => '[Your Campus]'],
-                    ['label' => 'Community Program',                 'caption' => 'Youth Empowerment Program'],
-                    ['label' => 'Media Feature',                     'caption' => 'Media Coverage'],
+                    [
+                        'label' => 'Official Portrait',
+                        'caption' => 'Official Portrait, 2026',
+                        'src' => 'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=1000&q=80'
+                    ],
+                    [
+                        'label' => 'Advocacy Forum',
+                        'caption' => 'Advocacy Forum',
+                        'src' => 'https://images.unsplash.com/photo-1475721027785-f74eccf877e2?auto=format&fit=crop&w=1000&q=80'
+                    ],
+                    [
+                        'label' => 'Pageant Stage',
+                        'caption' => 'Pageant Stage & Runway',
+                        'src' => 'https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=1000&q=80'
+                    ],
+                    [
+                        'label' => 'Campus Life',
+                        'caption' => 'Campus Activities',
+                        'src' => 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1000&q=80'
+                    ],
+                    [
+                        'label' => 'Community Outreach',
+                        'caption' => 'Youth Empowerment Program',
+                        'src' => 'https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=1000&q=80'
+                    ],
+                    [
+                        'label' => 'Editorial Shoot',
+                        'caption' => 'Media Coverage',
+                        'src' => 'https://images.unsplash.com/photo-1469334031218-e382a71b716b?auto=format&fit=crop&w=1000&q=80'
+                    ],
                 ];
             ?>
 
@@ -417,15 +426,9 @@ function format_date(string $iso): string {
                     data-lightbox="true"
                     aria-label="<?= htmlspecialchars($gitem['caption']) ?>"
                 >
-                    <!--
-                        TODO: Replace placeholder with real image.
-                        <img src="/assets/img/gallery-<?= $gi + 1 ?>.jpg"
-                             alt="<?= htmlspecialchars($gitem['label']) ?>"
-                             width="..." height="..." loading="lazy">
-                    -->
-                    <div class="gallery-placeholder" aria-hidden="true">
-                        <span><?= htmlspecialchars($gitem['label']) ?></span>
-                    </div>
+                    <img src="<?= htmlspecialchars($gitem['src']) ?>"
+                         alt="<?= htmlspecialchars($gitem['label']) ?>"
+                         loading="lazy">
 
                     <div class="gallery-item-overlay" aria-hidden="true">
                         <p class="gallery-item-caption">
