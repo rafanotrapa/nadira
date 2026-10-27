@@ -139,8 +139,8 @@ function format_date(string $iso): string {
 
         <!-- Right: Hero portrait image -->
         <div class="hero-image-wrap" role="img" aria-label="Official portrait">
-            <img src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=1200"
-                 alt="Confident young woman with bright smile"
+            <img src="https://images.pexels.com/photos/1181690/pexels-photo-1181690.jpeg?auto=compress&cs=tinysrgb&w=1200&h=1600&fit=crop"
+                 alt="Professional portrait of young woman"
                  width="720" height="960" loading="eager" fetchpriority="high">
         </div>
 

@@ -922,6 +922,13 @@ body.loaded { overflow: auto !important; height: auto !important; }
     pointer-events: none;
 }
 
+.intro-text span {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInSlide 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
 .intro-text span.name-accent { color: var(--color-accent); }
 
 @keyframes fadeInSlide {
