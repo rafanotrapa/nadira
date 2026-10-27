@@ -131,8 +131,8 @@ function format_date(string $iso): string {
 
         <!-- Right: Hero portrait image -->
         <div class="hero-image-wrap" role="img" aria-label="Official portrait">
-            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1200&q=85"
-                 alt="Editorial fashion portrait"
+            <img src="https://images.unsplash.com/photo-1602789658195-14a88c9fa4db?auto=format&fit=crop&w=1200&q=80"
+                 alt="Confident young woman with bright smile"
                  width="720" height="960" loading="eager" fetchpriority="high">
         </div>
 
@@ -388,32 +388,32 @@ function format_date(string $iso): string {
                     [
                         'label' => 'Official Portrait',
                         'caption' => 'Official Portrait, 2026',
-                        'src' => 'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=1000&q=80'
+                        'src' => 'https://images.unsplash.com/photo-1560253023-3ec5d502959f?auto=format&fit=crop&w=1000&q=80'
                     ],
                     [
-                        'label' => 'Advocacy Forum',
-                        'caption' => 'Advocacy Forum',
-                        'src' => 'https://images.unsplash.com/photo-1475721027785-f74eccf877e2?auto=format&fit=crop&w=1000&q=80'
+                        'label' => 'Advocacy Event',
+                        'caption' => 'Youth Empowerment Forum',
+                        'src' => 'https://images.unsplash.com/photo-1529390700576-925672326756?auto=format&fit=crop&w=1000&q=80'
                     ],
                     [
                         'label' => 'Pageant Stage',
-                        'caption' => 'Pageant Stage & Runway',
-                        'src' => 'https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=1000&q=80'
-                    ],
-                    [
-                        'label' => 'Campus Life',
-                        'caption' => 'Campus Activities',
-                        'src' => 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1000&q=80'
+                        'caption' => 'Pageant Performance',
+                        'src' => 'https://images.unsplash.com/photo-1595225476474-875d5983c273?auto=format&fit=crop&w=1000&q=80'
                     ],
                     [
                         'label' => 'Community Outreach',
-                        'caption' => 'Youth Empowerment Program',
-                        'src' => 'https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=1000&q=80'
+                        'caption' => 'Volunteer Work',
+                        'src' => 'https://images.unsplash.com/photo-1545167622351-245b8ec5ca08?auto=format&fit=crop&w=1000&q=80'
+                    ],
+                    [
+                        'label' => 'Campus Life',
+                        'caption' => 'Student Activities',
+                        'src' => 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1000&q=80'
                     ],
                     [
                         'label' => 'Editorial Shoot',
-                        'caption' => 'Media Coverage',
-                        'src' => 'https://images.unsplash.com/photo-1469334031218-e382a71b716b?auto=format&fit=crop&w=1000&q=80'
+                        'caption' => 'Media Feature',
+                        'src' => 'https://images.unsplash.com/photo-1622279531435-8c11138a5813?auto=format&fit=crop&w=1000&q=80'
                     ],
                 ];
             ?>
