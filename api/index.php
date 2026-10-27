@@ -32,12 +32,12 @@ function format_date(string $iso): string {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Nadira Britania — Finalis Miss Teenager Indonesia 2026 Perwakilan Sumatera Barat. Mahasiswi President University, advokat pemberdayaan remaja, dan suara generasi muda Indonesia.">
+    <meta name="description" content="Nadira Britania — Finalist Miss Teenager Indonesia 2026 representing West Sumatra. Elegant responsive editorial portfolio template.">
     <meta name="author" content="Nadira Britania">
 
     <!-- Open Graph -->
     <meta property="og:title"       content="Nadira Britania — Miss Teenager Indonesia 2026">
-    <meta property="og:description" content="Finalis Miss Teenager Indonesia 2026 Perwakilan Sumatera Barat. Advokat pemberdayaan remaja dan kesehatan mental.">
+    <meta property="og:description" content="Finalist Miss Teenager Indonesia 2026 representing West Sumatra. Elegant responsive editorial portfolio template.">
     <meta property="og:type"        content="website">
 
     <title>Nadira Britania &mdash; Miss Teenager Indonesia 2026</title>
@@ -62,10 +62,10 @@ function format_date(string $iso): string {
 
         <!-- Desktop links -->
         <ul class="nav-links" role="list">
-            <li><a href="#about">Tentang</a></li>
-            <li><a href="#advocacy">Advokasi</a></li>
-            <li><a href="#gallery">Galeri</a></li>
-            <li><a href="#contact">Kontak</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#advocacy">Advocacy</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#contact">Contact</a></li>
         </ul>
 
         <!-- Mobile hamburger -->
@@ -83,18 +83,18 @@ function format_date(string $iso): string {
     </div>
 </nav>
 
-<!-- Mobile nav drawer -->
+        <!-- Mobile nav drawer -->
 <div
     class="nav-drawer"
     id="nav-drawer"
     role="dialog"
-    aria-label="Menu Navigasi Mobile"
+    aria-label="Mobile Navigation Menu"
     aria-hidden="true"
 >
-    <a href="#about">Tentang</a>
-    <a href="#advocacy">Advokasi</a>
-    <a href="#gallery">Galeri</a>
-    <a href="#contact">Kontak</a>
+    <a href="#about">About</a>
+    <a href="#advocacy">Advocacy</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#contact">Contact</a>
 </div>
 
 
@@ -108,7 +108,7 @@ function format_date(string $iso): string {
         <div class="hero-copy">
             <div class="hero-eyebrow" aria-hidden="true">
                 <span class="hero-eyebrow-line"></span>
-                <span class="label-meta">Finalis 2026</span>
+                <span class="label-meta">Finalist 2026</span>
             </div>
 
             <h1 class="hero-name">
@@ -118,11 +118,11 @@ function format_date(string $iso): string {
 
             <p class="hero-title">
                 <strong>Miss Teenager Indonesia 2026</strong><br>
-                Perwakilan Sumatera Barat
+                West Sumatra Representative
             </p>
 
             <a href="#about" class="hero-cta">
-                Kenali Saya
+                Learn More
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
                     <path d="M1 7h12M8 3l5 4-5 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
@@ -174,63 +174,56 @@ function format_date(string $iso): string {
 
             <!-- Left: Narrative -->
             <div class="about-body">
-                <p class="label-meta about-label">Tentang Saya</p>
+                <p class="label-meta about-label">About / Bio</p>
 
                 <h2 id="about-heading" class="about-heading">
-                    Bukan sekadar
-                    <em>mahkota,</em>
-                    tapi misi.
+                    Lorem ipsum dolor
+                    <em>sit amet,</em>
+                    consectetur.
                 </h2>
 
                 <p>
-                    Saya <strong>Nadira Britania</strong>, mahasiswi <strong>President University</strong>
-                    yang percaya bahwa posisi seseorang selalu datang dengan tanggung jawab.
-                    Sebagai Finalis Miss Teenager Indonesia 2026 Perwakilan Sumatera Barat,
-                    saya membawa lebih dari sekadar representasi daerah. Saya membawa suara
-                    ribuan remaja yang belum mendapat tempat untuk bercerita.
+                    I am <strong>Nadira Britania</strong>, a student at <strong>[Your Campus / University]</strong>
+                    who believes that platform comes with purpose.
+                    As a Finalist for Miss Teenager Indonesia 2026 representing West Sumatra,
+                    I aim to represent both regional pride and youth empowerment.
                 </p>
 
                 <p>
-                    Perjalanan saya dalam dunia advokasi dimulai dari kepedulian sederhana:
-                    melihat teman-teman sebaya berjuang dalam senyap dengan tekanan akademik,
-                    perundungan, dan stigma seputar kesehatan mental. Dari kepedulian itu,
-                    lahirlah komitmen untuk menjadi jembatan antara generasi muda dan
-                    percakapan-percakapan yang perlu terjadi.
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
                 </p>
 
                 <p>
-                    Melalui esai, diskusi publik, dan program komunitas, saya bekerja untuk
-                    menciptakan ruang aman bagi remaja Indonesia agar tumbuh dengan percaya diri,
-                    sehat secara mental, dan sadar akan potensi diri mereka yang sesungguhnya.
+                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                 </p>
             </div>
 
             <!-- Right: Highlights grid -->
             <div class="about-right reveal">
-                <div class="highlights-grid" role="list" aria-label="Profil singkat Nadira">
+                <div class="highlights-grid" role="list" aria-label="Profile Highlights">
 
                     <div class="highlight-card" role="listitem">
                         <div class="highlight-icon" aria-hidden="true">I</div>
-                        <p class="highlight-title">Pendidikan</p>
-                        <p class="highlight-value">President University</p>
+                        <p class="highlight-title">Education</p>
+                        <p class="highlight-value">[Your Campus]</p>
                     </div>
 
                     <div class="highlight-card" role="listitem">
                         <div class="highlight-icon" aria-hidden="true">II</div>
-                        <p class="highlight-title">Representasi</p>
-                        <p class="highlight-value">Sumatera Barat</p>
+                        <p class="highlight-title">Representation</p>
+                        <p class="highlight-value">West Sumatra</p>
                     </div>
 
                     <div class="highlight-card" role="listitem">
                         <div class="highlight-icon" aria-hidden="true">III</div>
-                        <p class="highlight-title">Advokasi Utama</p>
-                        <p class="highlight-value">Pemberdayaan Remaja</p>
+                        <p class="highlight-title">Core Focus</p>
+                        <p class="highlight-value">Youth Empowerment</p>
                     </div>
 
                     <div class="highlight-card" role="listitem">
                         <div class="highlight-icon" aria-hidden="true">IV</div>
-                        <p class="highlight-title">Fokus Isu</p>
-                        <p class="highlight-value">Kesehatan Mental &amp; Anti-Perundungan</p>
+                        <p class="highlight-title">Advocacy</p>
+                        <p class="highlight-value">Social Impact &amp; Education</p>
                     </div>
 
                 </div>
@@ -253,10 +246,10 @@ function format_date(string $iso): string {
                     Youth <em>Voice</em>
                 </h2>
                 <p class="advocacy-subtitle">
-                    Esai dan refleksi tentang isu-isu yang paling penting bagi generasi kami.
+                    Essays and reflections on topics that matter to this generation.
                 </p>
             </div>
-            <div class="advocacy-count" aria-label="<?= count($articles) ?> esai diterbitkan">
+            <div class="advocacy-count" aria-label="<?= count($articles) ?> essays published">
                 <?= sprintf('%02d', count($articles)) ?>
             </div>
         </div>
@@ -387,10 +380,10 @@ function format_date(string $iso): string {
 
         <div class="gallery-header reveal">
             <h2 id="gallery-heading" class="gallery-heading">
-                Momen &amp; <em>Perjalanan</em>
+                Moments &amp; <em>Journey</em>
             </h2>
             <p class="gallery-desc">
-                Potret resmi, kegiatan advokasi, dan momen penting dalam perjalanan misi Nadira Britania.
+                Official portraits, advocacy events, and key moments throughout the journey.
             </p>
         </div>
 
@@ -407,10 +400,10 @@ function format_date(string $iso): string {
 
             <?php
                 $gallery_items = [
-                    ['label' => 'Foto Resmi Miss Teenager 2026',    'caption' => 'Official Portrait, 2026'],
-                    ['label' => 'Kegiatan Advokasi Anti-Perundungan', 'caption' => 'Advocacy Forum, West Sumatra'],
-                    ['label' => 'Pageant — Babak Final',             'caption' => 'Miss Teenager Indonesia 2026 Finals'],
-                    ['label' => 'Campus Activities',                 'caption' => 'President University'],
+                    ['label' => 'Official Portrait 2026',    'caption' => 'Official Portrait, 2026'],
+                    ['label' => 'Advocacy Event', 'caption' => 'Advocacy Forum, West Sumatra'],
+                    ['label' => 'Pageant Finals',             'caption' => 'Miss Teenager Indonesia 2026 Finals'],
+                    ['label' => 'Campus Activities',                 'caption' => '[Your Campus]'],
                     ['label' => 'Community Program',                 'caption' => 'Youth Empowerment Program'],
                     ['label' => 'Media Feature',                     'caption' => 'Media Coverage'],
                 ];
@@ -459,28 +452,28 @@ function format_date(string $iso): string {
             <div class="footer-brand-col">
                 <p class="footer-brand">Nadira <span>Britania</span></p>
                 <p class="footer-tagline">
-                    Finalis Miss Teenager Indonesia 2026, Perwakilan Sumatera Barat.
-                    Advokat pemberdayaan remaja dan kesehatan mental.
+                    Finalist Miss Teenager Indonesia 2026 representing West Sumatra.
+                    Youth empowerment and social impact advocate.
                 </p>
             </div>
 
             <!-- Navigation links -->
             <div>
-                <p class="footer-col-title">Navigasi</p>
-                <nav aria-label="Navigasi Footer">
+                <p class="footer-col-title">Navigation</p>
+                <nav aria-label="Footer Navigation">
                     <ul class="footer-links" role="list">
-                        <li><a href="#about">Tentang</a></li>
-                        <li><a href="#advocacy">Advokasi</a></li>
-                        <li><a href="#gallery">Galeri</a></li>
-                        <li><a href="#contact">Kontak</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#advocacy">Advocacy</a></li>
+                        <li><a href="#gallery">Gallery</a></li>
+                        <li><a href="#contact">Contact</a></li>
                     </ul>
                 </nav>
             </div>
 
             <!-- Social + Contact -->
             <div>
-                <p class="footer-col-title">Ikuti Perjalanan</p>
-                <div class="footer-social" aria-label="Tautan media sosial">
+                <p class="footer-col-title">Follow the Journey</p>
+                <div class="footer-social" aria-label="Social media links">
 
                     <!-- Instagram -->
                     <a
@@ -488,7 +481,7 @@ function format_date(string $iso): string {
                         target="_blank"
                         rel="noopener noreferrer"
                         class="social-link"
-                        aria-label="Instagram Nadira Britania (membuka tab baru)"
+                        aria-label="Instagram (opens new tab)"
                     >
                         <svg viewBox="0 0 24 24" aria-hidden="true">
                             <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
@@ -501,7 +494,7 @@ function format_date(string $iso): string {
                         target="_blank"
                         rel="noopener noreferrer"
                         class="social-link"
-                        aria-label="TikTok Nadira Britania (membuka tab baru)"
+                        aria-label="TikTok (opens new tab)"
                     >
                         <svg viewBox="0 0 24 24" aria-hidden="true">
                             <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/>
@@ -510,9 +503,9 @@ function format_date(string $iso): string {
 
                     <!-- Email -->
                     <a
-                        href="mailto:nadira.britania@example.com"
+                        href="mailto:your.email@example.com"
                         class="social-link"
-                        aria-label="Kirim email ke Nadira Britania"
+                        aria-label="Send email"
                     >
                         <svg viewBox="0 0 24 24" aria-hidden="true">
                             <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
@@ -526,10 +519,10 @@ function format_date(string $iso): string {
 
         <div class="footer-bottom">
             <p class="footer-copy">
-                &copy; <?= date('Y') ?> Nadira Britania. Dibuat dengan dedikasi.
+                &copy; <?= date('Y') ?> Nadira Britania. Made with dedication.
             </p>
             <p class="footer-rep">
-                Miss Teenager Indonesia 2026 &mdash; Perwakilan Sumatera Barat
+                Miss Teenager Indonesia 2026 — West Sumatra Representative
             </p>
         </div>
     </div>
