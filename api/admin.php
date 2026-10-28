@@ -50,22 +50,33 @@ $isLoggedIn = isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'
 if ($isLoggedIn && $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_status'])) {
     $reportId = (int) $_POST['report_id'];
     $newStatus = $_POST['status'] ?? '';
-    if ($pdo && $newStatus) {
-        $stmt = $pdo->prepare("UPDATE reports SET status = ? WHERE id = ?");
-        $stmt->execute([$newStatus, $reportId]);
+    
+    if ($reportId && $newStatus) {
+        $reportsFile = __DIR__ . '/../data/reports.json';
+        if (file_exists($reportsFile)) {
+            $reports = json_decode(file_get_contents($reportsFile), true) ?? [];
+            
+            foreach ($reports as &$report) {
+                if ($report['id'] === $reportId) {
+                    $report['status'] = $newStatus;
+                    break;
+                }
+            }
+            
+            file_put_contents($reportsFile, json_encode($reports, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE), LOCK_EX);
+        }
     }
+    
     header('Location: /admin');
     exit;
 }
 
-// Fetch reports
+// Fetch reports from JSON
 $reports = [];
-if ($isLoggedIn && $pdo) {
-    try {
-        $stmt = $pdo->query("SELECT * FROM reports ORDER BY created_at DESC");
-        $reports = $stmt->fetchAll();
-    } catch (PDOException $e) {
-        // Table might not exist yet
+if ($isLoggedIn) {
+    $reportsFile = __DIR__ . '/../data/reports.json';
+    if (file_exists($reportsFile)) {
+        $reports = json_decode(file_get_contents($reportsFile), true) ?? [];
     }
 }
 ?><!DOCTYPE html>

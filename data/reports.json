@@ -1,0 +1,11 @@
+[
+  {
+    "id": 1,
+    "reference_id": "BRITAKAN-DEMO-001",
+    "category": "Bullying",
+    "role": "I experienced the incident",
+    "description": "Contoh laporan perundungan di sekolah untuk keperluan demonstrasi.",
+    "status": "Initial Review",
+    "created_at": "2026-10-28 10:00:00"
+  }
+]

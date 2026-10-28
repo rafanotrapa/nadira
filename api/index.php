@@ -29,32 +29,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
 
         if ($category && $role && $description) {
             $refId = 'BRITAKAN-' . strtoupper(substr(md5(uniqid()), 0, 6));
-            if ($pdo) {
-                $stmt = $pdo->prepare("INSERT INTO reports (reference_id, category, role, description) VALUES (?, ?, ?, ?)");
-                $stmt->execute([$refId, $category, $role, $description]);
+            
+            // Load existing reports from JSON
+            $reportsFile = __DIR__ . '/../data/reports.json';
+            $reports = [];
+            if (file_exists($reportsFile)) {
+                $reports = json_decode(file_get_contents($reportsFile), true) ?? [];
             }
+            
+            // Add new report
+            $newReport = [
+                'id' => count($reports) + 1,
+                'reference_id' => $refId,
+                'category' => $category,
+                'role' => $role,
+                'description' => $description,
+                'status' => 'Received',
+                'created_at' => date('Y-m-d H:i:s')
+            ];
+            
+            $reports[] = $newReport;
+            
+            // Save to JSON
+            file_put_contents($reportsFile, json_encode($reports, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE), LOCK_EX);
+            
             echo json_encode(['success' => true, 'ref_id' => $refId]);
             exit;
         }
         echo json_encode(['success' => false, 'error' => 'Invalid inputs']);
-        exit;
-    }
-
-    if ($_POST['action'] === 'admin_login') {
-        $user = trim($_POST['username'] ?? '');
-        $pass = trim($_POST['password'] ?? '');
-        if ($pdo) {
-            $stmt = $pdo->prepare("SELECT * FROM admins WHERE username = ?");
-            $stmt->execute([$user]);
-            $admin = $stmt->fetch();
-            if ($admin && password_verify($pass, $admin['password_hash'])) {
-                $_SESSION['admin_logged_in'] = true;
-                $_SESSION['admin_user'] = $admin['username'];
-                echo json_encode(['success' => true]);
-                exit;
-            }
-        }
-        echo json_encode(['success' => false, 'error' => 'Invalid credentials']);
         exit;
     }
 }
