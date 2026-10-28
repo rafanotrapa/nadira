@@ -9,7 +9,6 @@ declare(strict_types=1);
 
 session_start();
 
-// Handle language selection
 $lang = $_GET['lang'] ?? 'id';
 if (!in_array($lang, ['id', 'en'], true)) {
     $lang = 'id';
@@ -38,21 +37,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
             exit;
         }
         echo json_encode(['success' => false, 'error' => 'Invalid inputs']);
-        exit;
-    }
-
-    if ($_POST['action'] === 'track_report') {
-        $refId = trim($_POST['ref_id'] ?? '');
-        if ($pdo) {
-            $stmt = $pdo->prepare("SELECT reference_id, category, status, created_at FROM reports WHERE reference_id = ?");
-            $stmt->execute([$refId]);
-            $report = $stmt->fetch();
-            if ($report) {
-                echo json_encode(['success' => true, 'report' => $report]);
-                exit;
-            }
-        }
-        echo json_encode(['success' => false, 'error' => 'Report not found']);
         exit;
     }
 
@@ -87,35 +71,21 @@ function encode_data(mixed $value): string {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="BRITAKAN — No Voice Left Unheard. Youth Advocacy, Safety Education, and Support Platform initiated by Nadira Britania.">
-    <meta name="author" content="Nadira Britania">
-
     <title>BRITAKAN &mdash; No Voice Left Unheard</title>
 
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="/assets/css/style.css">
 </head>
-<body class="loading">
+<body>
 
-<!-- Quick Exit Fullscreen Shield -->
-<div id="quick-exit-screen" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:#fff; z-index:999999; text-align:center; padding-top:10vh;">
-    <h1>BBC Weather &mdash; London</h1>
-    <p>Loading weather forecast details...</p>
-</div>
-
-<!-- ============================================================
-     NAVIGATION
-     ============================================================ -->
+<!-- NAVIGATION -->
 <nav class="site-nav" role="navigation" aria-label="Main Navigation">
     <div class="nav-inner">
-        <a href="#hero" class="nav-brand" aria-label="BRITAKAN Home">
-            BRITAKAN<span>.</span>
-        </a>
+        <a href="#hero" class="nav-brand">BRITAKAN<span>.</span></a>
 
-        <!-- Desktop links -->
         <ul class="nav-links" role="list">
             <li><a href="#hero"><?= $content['nav']['home'] ?></a></li>
             <li><a href="#about"><?= $content['nav']['about'] ?></a></li>
@@ -127,24 +97,12 @@ function encode_data(mixed $value): string {
         </ul>
 
         <div class="header-actions">
-            <!-- Language Switcher -->
             <div class="lang-switch">
                 <a href="?lang=id" class="<?= $lang === 'id' ? 'active' : '' ?>">ID</a>
                 <a href="?lang=en" class="<?= $lang === 'en' ? 'active' : '' ?>">EN</a>
             </div>
-
-            <!-- Login Modals Trigger -->
-            <button onclick="toggleModal('track-modal')" style="font-size:0.8rem; font-weight:600; background:none; border:1px solid #d1d5db; padding:4px 8px; border-radius:4px; cursor:pointer;">
-                Track Report
-            </button>
-
-            <!-- Quick Exit Button -->
-            <button id="quick-exit-btn" class="quick-exit-btn">
-                <?= $content['nav']['quick_exit'] ?>
-            </button>
         </div>
 
-        <!-- Mobile hamburger -->
         <button class="nav-toggle" id="nav-toggle" aria-controls="nav-drawer" aria-expanded="false" aria-label="Open menu">
             <span></span><span></span><span></span>
         </button>
@@ -160,9 +118,6 @@ function encode_data(mixed $value): string {
     <a href="#report"><?= $content['nav']['report'] ?></a>
     <a href="#resources"><?= $content['nav']['resources'] ?></a>
     <a href="#contact"><?= $content['nav']['contact'] ?></a>
-    <a href="#" onclick="toggleModal('track-modal')">Track Report</a>
-    <a href="#" onclick="toggleModal('admin-modal')">Admin Login</a>
-    <a href="#" id="mobile-quick-exit" style="color: #dc2626; font-weight:700;"><?= $content['nav']['quick_exit'] ?></a>
 </div>
 
 
@@ -182,7 +137,7 @@ function encode_data(mixed $value): string {
                 <?= $content['hero']['subheadline'] ?>
             </p>
             <div style="display: flex; gap: 1rem; margin-top: 2rem; flex-wrap: wrap;">
-                <a href="#help" class="hero-cta" style="background: var(--accent, #b91c1c); color: #fff; padding: 12px 24px; border-radius: 4px; text-decoration: none;">
+                <a href="#help" class="hero-cta" style="background: var(--color-accent, #b91c1c); color: #fff; padding: 12px 24px; border-radius: 4px; text-decoration: none;">
                     <?= $content['hero']['cta_primary'] ?>
                 </a>
                 <a href="#learn" class="hero-cta" style="background: transparent; border: 1px solid currentColor; padding: 12px 24px; border-radius: 4px; text-decoration: none;">
@@ -190,14 +145,226 @@ function encode_data(mixed $value): string {
                 </a>
             </div>
         </div>
-        <div class="hero-image-wrap" role="img" aria-label="BRITAKAN advocacy banner">
-            <img src="/assets/img/hero.jpg" alt="BRITAKAN Initiative" width="720" height="960" loading="eager" fetchpriority="high">
+        <div class="hero-image-wrap">
+            <img src="/assets/img/hero.jpg" alt="BRITAKAN Initiative" width="720" height="960" loading="eager">
         </div>
     </div>
 </section>
 
 
-<!-- REPORT AN INCIDENT FORM -->
+<!-- WHY BRITAKAN EXISTS -->
+<section id="about" class="section">
+    <div class="container">
+        <div class="about-grid">
+            <div class="about-body">
+                <p class="label-meta about-label">Founder: Nadira Britania</p>
+                <h2 class="about-heading" style="font-size: 2.25rem; line-height: 1.2;">
+                    <?= $content['why_exists']['heading'] ?>
+                </h2>
+                <p style="margin-top: 1.5rem; line-height: 1.7;">
+                    <?= $content['why_exists']['body'] ?>
+                </p>
+                <div style="margin-top: 2rem;">
+                    <a href="#learn" style="display:inline-block; border-bottom: 2px solid currentColor; padding-bottom: 2px; text-decoration: none; font-weight: 600;">
+                        <?= $content['why_exists']['cta'] ?> &rarr;
+                    </a>
+                </div>
+            </div>
+            <div class="about-right">
+                <div style="background: rgba(0,0,0,0.03); padding: 3rem; border-radius: 8px; border: 1px solid rgba(0,0,0,0.08);">
+                    <h3 style="font-family: 'Cormorant Garamond', serif; font-size: 1.75rem; margin-bottom: 1rem;">
+                        <?= $content['about']['mission']['title'] ?>
+                    </h3>
+                    <p style="margin-bottom: 2rem; line-height: 1.6; opacity: 0.85;">
+                        <?= $content['about']['mission']['body'] ?>
+                    </p>
+                    <h3 style="font-family: 'Cormorant Garamond', serif; font-size: 1.75rem; margin-bottom: 1rem;">
+                        <?= $content['about']['vision']['title'] ?>
+                    </h3>
+                    <p style="line-height: 1.6; opacity: 0.85;">
+                        <?= $content['about']['vision']['body'] ?>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- THREE FOCUS AREAS -->
+<section class="section section-alt">
+    <div class="container">
+        <div class="advocacy-header reveal">
+            <div>
+                <h2 class="advocacy-heading"><?= $content['focus_areas']['heading'] ?></h2>
+                <p class="advocacy-subtitle">Comprehensive educational resources across three critical areas.</p>
+            </div>
+        </div>
+
+        <div class="focus-grid" role="list">
+            <?php foreach ($content['focus_areas']['cards'] as $card): ?>
+                <div class="focus-card" role="listitem">
+                    <div>
+                        <h3 style="font-family: 'Cormorant Garamond', serif; font-size: 1.75rem; margin-bottom: 1rem;">
+                            <?= $card['title'] ?>
+                        </h3>
+                        <p style="line-height: 1.6; opacity: 0.85; margin-bottom: 2rem;">
+                            <?= $card['description'] ?>
+                        </p>
+                    </div>
+                    <a href="#learn" style="display:inline-flex; align-items:center; gap:6px; font-weight:600; text-decoration:none;">
+                        <?= $card['cta'] ?>
+                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                            <path d="M1 6h10M7 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    </div>
+</section>
+
+
+<!-- HOW IT WORKS -->
+<section class="section">
+    <div class="container">
+        <div class="advocacy-header reveal">
+            <div>
+                <h2 class="advocacy-heading"><?= $content['how_it_works']['heading'] ?></h2>
+                <p class="advocacy-subtitle"><?= $content['how_it_works']['supporting'] ?></p>
+            </div>
+        </div>
+
+        <div class="steps-grid">
+            <?php foreach ($content['how_it_works']['steps'] as $step): ?>
+                <div class="step-card">
+                    <div class="step-number"><?= $step['number'] ?></div>
+                    <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.75rem;"><?= $step['title'] ?></h3>
+                    <p style="font-size: 0.95rem; opacity: 0.85; line-height: 1.5;"><?= $step['description'] ?></p>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    </div>
+</section>
+
+
+<!-- LEARN & UNDERSTAND -->
+<section id="learn" class="section section-alt">
+    <div class="container">
+        <div class="advocacy-header reveal">
+            <div>
+                <h2 class="advocacy-heading"><?= $content['nav']['learn'] ?></h2>
+                <p class="advocacy-subtitle">Reliable educational articles to help you understand your rights and options.</p>
+            </div>
+            <div class="advocacy-count"><?= sprintf('%02d', count($articles)) ?></div>
+        </div>
+
+        <div class="articles-grid" role="list">
+            <?php foreach ($articles as $index => $article): ?>
+                <?php
+                    $is_featured = ($index === 0);
+                    $tags_json   = encode_data($article['tags']);
+                    $body_encoded = encode_data($article['body']);
+                    $date_display = $article['date_label'];
+                ?>
+
+                <article
+                    class="article-card"
+                    role="listitem"
+                    tabindex="0"
+                    data-slug="<?= encode_data($article['slug']) ?>"
+                    data-title="<?= encode_data($article['title']) ?>"
+                    data-subtitle="<?= encode_data($article['subtitle']) ?>"
+                    data-date="<?= encode_data($date_display) ?>"
+                    data-time="<?= (int) $article['reading_time'] ?>"
+                    data-tags="<?= $tags_json ?>"
+                    data-body="<?= $body_encoded ?>"
+                >
+                    <?php if ($is_featured): ?>
+                        <div class="article-card-left">
+                            <div class="article-meta">
+                                <span class="article-date"><?= htmlspecialchars($date_display) ?></span>
+                                <span class="article-dot"></span>
+                                <span class="article-time"><?= (int) $article['reading_time'] ?> min read</span>
+                            </div>
+                            <div class="article-tags">
+                                <?php foreach ($article['tags'] as $i => $tag): ?>
+                                    <span class="tag-pill <?= $i === 0 ? 'tag-primary' : '' ?>"><?= htmlspecialchars($tag) ?></span>
+                                <?php endforeach; ?>
+                            </div>
+                            <h3 class="article-title"><?= htmlspecialchars($article['title']) ?></h3>
+                            <p class="article-subtitle"><?= htmlspecialchars($article['subtitle']) ?></p>
+                            <span class="article-read-link" role="button">
+                                Read Guide
+                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                                    <path d="M1 6h10M7 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </span>
+                        </div>
+                        <div class="article-card-right">
+                            <p class="article-excerpt"><?= htmlspecialchars($article['excerpt']) ?></p>
+                        </div>
+                    <?php else: ?>
+                        <div class="article-number"><?= sprintf('%02d', $index + 1) ?></div>
+                        <div class="article-meta">
+                            <span class="article-date"><?= htmlspecialchars($date_display) ?></span>
+                            <span class="article-dot"></span>
+                            <span class="article-time"><?= (int) $article['reading_time'] ?> min</span>
+                        </div>
+                        <div class="article-tags">
+                            <?php foreach ($article['tags'] as $i => $tag): ?>
+                                <span class="tag-pill <?= $i === 0 ? 'tag-primary' : '' ?>"><?= htmlspecialchars($tag) ?></span>
+                            <?php endforeach; ?>
+                        </div>
+                        <h3 class="article-title"><?= htmlspecialchars($article['title']) ?></h3>
+                        <p class="article-subtitle"><?= htmlspecialchars($article['subtitle']) ?></p>
+                        <p class="article-excerpt"><?= htmlspecialchars($article['excerpt']) ?></p>
+                        <span class="article-read-link" role="button">
+                            Read Guide
+                            <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                                <path d="M1 6h10M7 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </span>
+                    <?php endif; ?>
+                </article>
+            <?php endforeach; ?>
+        </div>
+    </div>
+</section>
+
+
+<!-- GET HELP & SUPPORT -->
+<section id="help" class="section">
+    <div class="container">
+        <div class="advocacy-header reveal">
+            <div>
+                <h2 class="advocacy-heading"><?= $content['get_help']['heading'] ?></h2>
+                <p class="advocacy-subtitle"><?= $content['get_help']['intro'] ?></p>
+            </div>
+        </div>
+
+        <div class="support-grid">
+            <?php foreach ($content['get_help']['cards'] as $card): ?>
+                <div class="support-card <?= $card['type'] === 'danger' ? 'danger-card' : '' ?>">
+                    <h3 style="font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; margin-bottom: 1rem; <?= $card['type'] === 'danger' ? 'color: #dc2626;' : '' ?>">
+                        <?= $card['title'] ?>
+                    </h3>
+                    <p style="font-size: 0.95rem; line-height: 1.6; opacity: 0.85; margin-bottom: 1.5rem;">
+                        <?= $card['body'] ?>
+                    </p>
+                    <?php if ($card['type'] === 'danger'): ?>
+                        <a href="tel:112" style="display:inline-block; background:#dc2626; color:#fff; padding:8px 16px; border-radius:4px; text-decoration:none; font-size:0.85rem;">Emergency: Call 112</a>
+                    <?php else: ?>
+                        <a href="#report" style="font-weight:600; text-decoration:none;">Learn Options &rarr;</a>
+                    <?php endif; ?>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    </div>
+</section>
+
+
+<!-- REPORT AN INCIDENT -->
 <section id="report" class="section section-alt">
     <div class="container" style="max-width: 800px;">
         <div style="text-align: center; margin-bottom: 2rem;">
@@ -232,7 +399,7 @@ function encode_data(mixed $value): string {
                     <textarea name="description" rows="4" required style="width: 100%; padding: 10px; border: 1px solid #d1d5db; border-radius: 4px;"></textarea>
                 </div>
 
-                <button type="submit" style="background: var(--accent, #b91c1c); color: #fff; border: none; padding: 12px 24px; border-radius: 4px; font-weight: 600; cursor: pointer; width: 100%;">
+                <button type="submit" style="background: var(--color-accent, #b91c1c); color: #fff; border: none; padding: 12px 24px; border-radius: 4px; font-weight: 600; cursor: pointer; width: 100%;">
                     <?= $content['report']['form']['submit'] ?>
                 </button>
             </form>
@@ -248,42 +415,69 @@ function encode_data(mixed $value): string {
 </section>
 
 
-<!-- REPORT TRACKING MODAL -->
-<div id="track-modal" class="lightbox-backdrop" style="display:none; align-items:center; justify-center:center;">
-    <div class="lightbox-panel" style="max-width: 450px; padding: 2rem;">
-        <button onclick="toggleModal('track-modal')" class="lightbox-close">&times;</button>
-        <h3 style="font-family: 'Cormorant Garamond', serif; font-size: 1.75rem; margin-bottom: 1rem;">Track Report Status</h3>
-        <form onsubmit="trackReport(event)">
-            <div style="margin-bottom: 1rem;">
-                <label style="display:block; font-size:0.85rem; font-weight:600; margin-bottom:0.4rem;">Reference ID</label>
-                <input type="text" id="track-ref" placeholder="e.g. BRITAKAN-DEMO-9999" required style="width:100%; padding:10px; border:1px solid #ccc; border-radius:4px;">
+<!-- RESOURCES -->
+<section id="resources" class="section">
+    <div class="container">
+        <div class="advocacy-header reveal">
+            <div>
+                <h2 class="advocacy-heading"><?= $content['resources']['heading'] ?></h2>
+                <p class="advocacy-subtitle">Explore verified educational resources, guidelines, and external support services.</p>
             </div>
-            <button type="submit" style="width:100%; background:#000; color:#fff; border:none; padding:10px; border-radius:4px; font-weight:600; cursor:pointer;">Search</button>
-        </form>
-        <div id="track-result" style="margin-top:1rem; font-size:0.9rem;"></div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin-top: 3rem;">
+            <?php foreach ($content['resources']['categories'] as $cat): ?>
+                <div style="background: #fff; border: 1px solid #e5e7eb; border-radius: 8px; padding: 2rem;">
+                    <h3 style="font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; margin-bottom: 1rem;"><?= $cat ?></h3>
+                    <p style="font-size: 0.9rem; opacity: 0.8; margin-bottom: 1.5rem;">Curated guides and verified references.</p>
+                    <a href="https://rainn.org/" target="_blank" rel="noopener noreferrer" style="font-weight: 600; text-decoration: none;">External Reference (RAINN) &rarr;</a>
+                </div>
+            <?php endforeach; ?>
+        </div>
     </div>
-</div>
+</section>
 
 
-<!-- ADMIN LOGIN MODAL -->
-<div id="admin-modal" class="lightbox-backdrop" style="display:none; align-items:center; justify-center:center;">
-    <div class="lightbox-panel" style="max-width: 400px; padding: 2rem;">
-        <button onclick="toggleModal('admin-modal')" class="lightbox-close">&times;</button>
-        <h3 style="font-family: 'Cormorant Garamond', serif; font-size: 1.75rem; margin-bottom: 1rem;">Admin Portal</h3>
-        <form onsubmit="adminLogin(event)">
-            <div style="margin-bottom: 1rem;">
-                <label style="display:block; font-size:0.85rem; font-weight:600; margin-bottom:0.4rem;">Username</label>
-                <input type="text" id="admin-user" required style="width:100%; padding:10px; border:1px solid #ccc; border-radius:4px;">
-            </div>
-            <div style="margin-bottom: 1rem;">
-                <label style="display:block; font-size:0.85rem; font-weight:600; margin-bottom:0.4rem;">Password</label>
-                <input type="password" id="admin-pass" required style="width:100%; padding:10px; border:1px solid #ccc; border-radius:4px;">
-            </div>
-            <button type="submit" style="width:100%; background:#b91c1c; color:#fff; border:none; padding:10px; border-radius:4px; font-weight:600; cursor:pointer;">Login</button>
-        </form>
-        <div id="admin-error" style="color:#dc2626; margin-top:0.5rem; font-size:0.85rem;"></div>
+<!-- CONTACT -->
+<section id="contact" class="section section-alt">
+    <div class="container" style="max-width: 800px;">
+        <div style="text-align: center; margin-bottom: 3rem;">
+            <h2 class="advocacy-heading" style="font-size: 2.5rem;"><?= $content['contact']['heading'] ?></h2>
+            <p class="advocacy-subtitle" style="max-width: 600px; margin: 1rem auto 0 auto;"><?= $content['contact']['body'] ?></p>
+        </div>
+
+        <div style="background: #fff; padding: 3rem; border-radius: 8px; border: 1px solid #e5e7eb;">
+            <form onsubmit="alert('Thank you for your message. We will get back to you shortly.'); return false;">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
+                    <div>
+                        <label style="display: block; font-weight: 600; margin-bottom: 0.5rem;">Name / Organization</label>
+                        <input type="text" required style="width: 100%; padding: 12px; border: 1px solid #d1d5db; border-radius: 4px;">
+                    </div>
+                    <div>
+                        <label style="display: block; font-weight: 600; margin-bottom: 0.5rem;">Email Address</label>
+                        <input type="email" required style="width: 100%; padding: 12px; border: 1px solid #d1d5db; border-radius: 4px;">
+                    </div>
+                </div>
+                <div style="margin-bottom: 1.5rem;">
+                    <label style="display: block; font-weight: 600; margin-bottom: 0.5rem;">Purpose of Inquiry</label>
+                    <select style="width: 100%; padding: 12px; border: 1px solid #d1d5db; border-radius: 4px;">
+                        <option>General Inquiry</option>
+                        <option>School Partnership</option>
+                        <option>Media & Press</option>
+                        <option>Educational Resources</option>
+                    </select>
+                </div>
+                <div style="margin-bottom: 1.5rem;">
+                    <label style="display: block; font-weight: 600; margin-bottom: 0.5rem;">Message</label>
+                    <textarea rows="4" required style="width: 100%; padding: 12px; border: 1px solid #d1d5db; border-radius: 4px;"></textarea>
+                </div>
+                <button type="submit" style="background: #000; color: #fff; border: none; padding: 14px 28px; border-radius: 4px; font-weight: 600; cursor: pointer; width: 100%;">
+                    Send Message
+                </button>
+            </form>
+        </div>
     </div>
-</div>
+</section>
 
 
 <!-- FOOTER -->
@@ -291,24 +485,36 @@ function encode_data(mixed $value): string {
     <div class="container">
         <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
             <p>&copy; <?= date('Y') ?> BRITAKAN &mdash; Nadira Britania.</p>
-            <button onclick="toggleModal('admin-modal')" style="color:rgba(255,255,255,0.5); font-size:0.8rem; background:none; border:none; cursor:pointer;">Admin Login</button>
+        </div>
+        <div style="margin-top: 1.5rem; font-size: 0.85rem; opacity: 0.7; line-height: 1.6;">
+            <p><?= $content['footer']['statement'] ?></p>
         </div>
     </div>
 </footer>
 
+
+<!-- ARTICLE MODAL -->
+<div class="lightbox-backdrop" id="article-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-hidden="true">
+    <div class="lightbox-panel">
+        <button class="lightbox-close" id="modal-close" aria-label="Close guide">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                <path d="M1 1l12 12M13 1L1 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+        </button>
+
+        <div class="article-modal-header">
+            <div class="article-modal-tags" id="modal-tags"></div>
+            <h2 class="article-modal-title" id="modal-title"></h2>
+            <p class="article-modal-subtitle" id="modal-subtitle"></p>
+            <div class="article-modal-meta" id="modal-meta"></div>
+        </div>
+
+        <div class="article-body" id="modal-body" aria-live="polite"></div>
+    </div>
+</div>
+
+<script src="/assets/js/main.js" defer></script>
 <script>
-    function toggleModal(id) {
-        const el = document.getElementById(id);
-        el.style.display = el.style.display === 'flex' ? 'none' : 'flex';
-    }
-
-    // Quick Exit
-    document.getElementById('quick-exit-btn').addEventListener('click', () => {
-        document.getElementById('quick-exit-screen').style.display = 'block';
-        window.location.replace('https://www.bbc.com/weather');
-    });
-
-    // Report Submission
     function submitReport(e) {
         e.preventDefault();
         const formData = new FormData(e.target);
@@ -321,50 +527,6 @@ function encode_data(mixed $value): string {
                     document.getElementById('report-form').style.display = 'none';
                     document.getElementById('res-ref').innerText = data.ref_id;
                     document.getElementById('report-result').style.display = 'block';
-                }
-            });
-    }
-
-    // Report Tracking
-    function trackReport(e) {
-        e.preventDefault();
-        const refId = document.getElementById('track-ref').value;
-        const formData = new FormData();
-        formData.append('action', 'track_report');
-        formData.append('ref_id', refId);
-
-        fetch('', { method: 'POST', body: formData })
-            .then(res => res.json())
-            .then(data => {
-                const resEl = document.getElementById('track-result');
-                if (data.success) {
-                    resEl.innerHTML = `<div style="background:#f0fdf4; padding:10px; border-radius:4px; border:1px solid #bbf7d0;">
-                        <strong>Status:</strong> ${data.report.status}<br>
-                        <strong>Category:</strong> ${data.report.category}<br>
-                        <small>Submitted: ${data.report.created_at}</small>
-                    </div>`;
-                } else {
-                    resEl.innerHTML = `<div style="color:#dc2626;">Report reference ID not found.</div>`;
-                }
-            });
-    }
-
-    // Admin Login
-    function adminLogin(e) {
-        e.preventDefault();
-        const formData = new FormData();
-        formData.append('action', 'admin_login');
-        formData.append('username', document.getElementById('admin-user').value);
-        formData.append('password', document.getElementById('admin-pass').value);
-
-        fetch('', { method: 'POST', body: formData })
-            .then(res => res.json())
-            .then(data => {
-                if (data.success) {
-                    alert('Login successful! Redirecting to dashboard...');
-                    location.reload();
-                } else {
-                    document.getElementById('admin-error').innerText = data.error;
                 }
             });
     }
