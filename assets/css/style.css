@@ -125,6 +125,58 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
     padding-inline: clamp(1rem, 5vw, 4rem);
 }
 
+/* Header Action Group - Language & Quick Exit */
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-shrink: 0;
+}
+
+/* Language Switcher */
+.lang-switch {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: var(--text-xs);
+    font-weight: 600;
+}
+
+.lang-switch a {
+    text-decoration: none;
+    color: var(--color-text-muted);
+    padding: 4px 8px;
+    border-radius: 2px;
+    transition: all 0.2s;
+}
+
+.lang-switch a.active {
+    background: var(--color-neutral);
+    color: var(--color-text);
+}
+
+/* Quick Exit Button */
+.quick-exit-btn {
+    background: #dc2626;
+    color: #fff;
+    font-size: var(--text-xs);
+    font-weight: 700;
+    padding: 6px 14px;
+    border-radius: 4px;
+    border: none;
+    white-space: nowrap;
+    transition: background-color 0.2s;
+    cursor: pointer;
+    min-width: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.quick-exit-btn:hover {
+    background: #b91c1c;
+}
+
 .nav-brand {
     font-family: var(--font-display);
     font-size: var(--text-lg);
