@@ -16,7 +16,6 @@ if (!in_array($lang, ['id', 'en'], true)) {
 
 $articles = require __DIR__ . '/../data/articles.php';
 $content  = require __DIR__ . '/../data/content.php';
-require_once __DIR__ . '/db.php';
 
 // Handle API requests
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {

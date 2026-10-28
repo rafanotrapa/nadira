@@ -10,7 +10,6 @@
 declare(strict_types=1);
 
 session_start();
-require_once __DIR__ . '/db.php';
 
 // Hardcoded admin credentials for Vercel demo
 // In production, use environment variables and proper database
