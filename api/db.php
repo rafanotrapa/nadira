@@ -39,7 +39,7 @@ try {
         ");
 
         // Seed default admin (admin / britakan2026)
-        $stmt = $pdo->prepare("INSERT INTO admins (username, password_hash, role) VALUES (?, ?, ?)");
+        $stmt = $pdo->prepare("INSERT OR IGNORE INTO admins (username, password_hash, role) VALUES (?, ?, ?)");
         $stmt->execute(['admin', password_hash('britakan2026', PASSWORD_DEFAULT), 'superadmin']);
 
         // Seed sample report for tracking demo
