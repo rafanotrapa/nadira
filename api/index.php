@@ -262,10 +262,16 @@ function encode_data(mixed $value): string {
         <div class="articles-grid" role="list">
             <?php foreach ($articles as $index => $article): ?>
                 <?php
-                    $is_featured = ($index === 0);
-                    $tags_json   = encode_data($article['tags']);
-                    $body_encoded = encode_data($article['body']);
-                    $date_display = $article['date_label'];
+                    $is_featured  = ($index === 0);
+                    $title        = is_array($article['title']) ? ($article['title'][$lang] ?? $article['title']['id']) : $article['title'];
+                    $subtitle     = is_array($article['subtitle']) ? ($article['subtitle'][$lang] ?? $article['subtitle']['id']) : $article['subtitle'];
+                    $date_display = is_array($article['date_label']) ? ($article['date_label'][$lang] ?? $article['date_label']['id']) : $article['date_label'];
+                    $tags         = is_array($article['tags']) && isset($article['tags'][$lang]) ? $article['tags'][$lang] : (is_array($article['tags']) ? $article['tags'] : []);
+                    $excerpt      = is_array($article['excerpt']) ? ($article['excerpt'][$lang] ?? $article['excerpt']['id']) : $article['excerpt'];
+                    $body         = is_array($article['body']) ? ($article['body'][$lang] ?? $article['body']['id']) : $article['body'];
+
+                    $tags_json    = encode_data($tags);
+                    $body_encoded = encode_data($body);
                 ?>
 
                 <article
@@ -273,8 +279,8 @@ function encode_data(mixed $value): string {
                     role="listitem"
                     tabindex="0"
                     data-slug="<?= encode_data($article['slug']) ?>"
-                    data-title="<?= encode_data($article['title']) ?>"
-                    data-subtitle="<?= encode_data($article['subtitle']) ?>"
+                    data-title="<?= encode_data($title) ?>"
+                    data-subtitle="<?= encode_data($subtitle) ?>"
                     data-date="<?= encode_data($date_display) ?>"
                     data-time="<?= (int) $article['reading_time'] ?>"
                     data-tags="<?= $tags_json ?>"
@@ -288,21 +294,21 @@ function encode_data(mixed $value): string {
                                 <span class="article-time"><?= (int) $article['reading_time'] ?> min read</span>
                             </div>
                             <div class="article-tags">
-                                <?php foreach ($article['tags'] as $i => $tag): ?>
+                                <?php foreach ($tags as $i => $tag): ?>
                                     <span class="tag-pill <?= $i === 0 ? 'tag-primary' : '' ?>"><?= htmlspecialchars($tag) ?></span>
                                 <?php endforeach; ?>
                             </div>
-                            <h3 class="article-title"><?= htmlspecialchars($article['title']) ?></h3>
-                            <p class="article-subtitle"><?= htmlspecialchars($article['subtitle']) ?></p>
+                            <h3 class="article-title"><?= htmlspecialchars($title) ?></h3>
+                            <p class="article-subtitle"><?= htmlspecialchars($subtitle) ?></p>
                             <span class="article-read-link" role="button">
-                                Read Guide
+                                <?= $lang === 'id' ? 'Baca Panduan' : 'Read Guide' ?>
                                 <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
                                     <path d="M1 6h10M7 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>
                             </span>
                         </div>
                         <div class="article-card-right">
-                            <p class="article-excerpt"><?= htmlspecialchars($article['excerpt']) ?></p>
+                            <p class="article-excerpt"><?= htmlspecialchars($excerpt) ?></p>
                         </div>
                     <?php else: ?>
                         <div class="article-number"><?= sprintf('%02d', $index + 1) ?></div>
@@ -312,15 +318,15 @@ function encode_data(mixed $value): string {
                             <span class="article-time"><?= (int) $article['reading_time'] ?> min</span>
                         </div>
                         <div class="article-tags">
-                            <?php foreach ($article['tags'] as $i => $tag): ?>
+                            <?php foreach ($tags as $i => $tag): ?>
                                 <span class="tag-pill <?= $i === 0 ? 'tag-primary' : '' ?>"><?= htmlspecialchars($tag) ?></span>
                             <?php endforeach; ?>
                         </div>
-                        <h3 class="article-title"><?= htmlspecialchars($article['title']) ?></h3>
-                        <p class="article-subtitle"><?= htmlspecialchars($article['subtitle']) ?></p>
-                        <p class="article-excerpt"><?= htmlspecialchars($article['excerpt']) ?></p>
+                        <h3 class="article-title"><?= htmlspecialchars($title) ?></h3>
+                        <p class="article-subtitle"><?= htmlspecialchars($subtitle) ?></p>
+                        <p class="article-excerpt"><?= htmlspecialchars($excerpt) ?></p>
                         <span class="article-read-link" role="button">
-                            Read Guide
+                            <?= $lang === 'id' ? 'Baca Panduan' : 'Read Guide' ?>
                             <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
                                 <path d="M1 6h10M7 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
