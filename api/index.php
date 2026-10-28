@@ -1,8 +1,6 @@
 <?php
 /**
  * index.php — BRITAKAN Platform Main Entry Point
- * Youth Advocacy, Safety Education, and Support Platform
- * Founder/Initiator: Nadira Britania
  */
 
 declare(strict_types=1);
@@ -16,49 +14,6 @@ if (!in_array($lang, ['id', 'en'], true)) {
 
 $articles = require __DIR__ . '/../data/articles.php';
 $content  = require __DIR__ . '/../data/content.php';
-
-// Handle API requests
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
-    header('Content-Type: application/json');
-    
-    if ($_POST['action'] === 'submit_report') {
-        $category = trim($_POST['category'] ?? '');
-        $role = trim($_POST['role'] ?? '');
-        $description = trim($_POST['description'] ?? '');
-
-        if ($category && $role && $description) {
-            $refId = 'BRITAKAN-' . strtoupper(substr(md5(uniqid()), 0, 6));
-            
-            // Load existing reports from JSON
-            $reportsFile = __DIR__ . '/../data/reports.json';
-            $reports = [];
-            if (file_exists($reportsFile)) {
-                $reports = json_decode(file_get_contents($reportsFile), true) ?? [];
-            }
-            
-            // Add new report
-            $newReport = [
-                'id' => count($reports) + 1,
-                'reference_id' => $refId,
-                'category' => $category,
-                'role' => $role,
-                'description' => $description,
-                'status' => 'Received',
-                'created_at' => date('Y-m-d H:i:s')
-            ];
-            
-            $reports[] = $newReport;
-            
-            // Save to JSON
-            file_put_contents($reportsFile, json_encode($reports, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE), LOCK_EX);
-            
-            echo json_encode(['success' => true, 'ref_id' => $refId]);
-            exit;
-        }
-        echo json_encode(['success' => false, 'error' => 'Invalid inputs']);
-        exit;
-    }
-}
 
 function encode_data(mixed $value): string {
     if (is_array($value)) {
@@ -93,6 +48,7 @@ function encode_data(mixed $value): string {
             <li><a href="#learn"><?= $content['nav']['learn'] ?></a></li>
             <li><a href="#help"><?= $content['nav']['help'] ?></a></li>
             <li><a href="#report"><?= $content['nav']['report'] ?></a></li>
+            <li><a href="#track" style="color:var(--color-accent); font-weight:700;">Track Ticket</a></li>
             <li><a href="#resources"><?= $content['nav']['resources'] ?></a></li>
             <li><a href="#contact"><?= $content['nav']['contact'] ?></a></li>
         </ul>
@@ -117,6 +73,7 @@ function encode_data(mixed $value): string {
     <a href="#learn"><?= $content['nav']['learn'] ?></a>
     <a href="#help"><?= $content['nav']['help'] ?></a>
     <a href="#report"><?= $content['nav']['report'] ?></a>
+    <a href="#track">Track Ticket</a>
     <a href="#resources"><?= $content['nav']['resources'] ?></a>
     <a href="#contact"><?= $content['nav']['contact'] ?></a>
 </div>
@@ -165,11 +122,6 @@ function encode_data(mixed $value): string {
                 <p style="margin-top: 1.5rem; line-height: 1.7;">
                     <?= $content['why_exists']['body'] ?>
                 </p>
-                <div style="margin-top: 2rem;">
-                    <a href="#learn" style="display:inline-block; border-bottom: 2px solid currentColor; padding-bottom: 2px; text-decoration: none; font-weight: 600;">
-                        <?= $content['why_exists']['cta'] ?> &rarr;
-                    </a>
-                </div>
             </div>
             <div class="about-right">
                 <div style="background: rgba(0,0,0,0.03); padding: 3rem; border-radius: 8px; border: 1px solid rgba(0,0,0,0.08);">
@@ -214,10 +166,7 @@ function encode_data(mixed $value): string {
                         </p>
                     </div>
                     <a href="#learn" style="display:inline-flex; align-items:center; gap:6px; font-weight:600; text-decoration:none;">
-                        <?= $card['cta'] ?>
-                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                            <path d="M1 6h10M7 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
+                        <?= $card['cta'] ?> &rarr;
                     </a>
                 </div>
             <?php endforeach; ?>
@@ -302,10 +251,7 @@ function encode_data(mixed $value): string {
                             <h3 class="article-title"><?= htmlspecialchars($title) ?></h3>
                             <p class="article-subtitle"><?= htmlspecialchars($subtitle) ?></p>
                             <span class="article-read-link" role="button">
-                                <?= $lang === 'id' ? 'Baca Panduan' : 'Read Guide' ?>
-                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                                    <path d="M1 6h10M7 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
+                                <?= $lang === 'id' ? 'Baca Panduan' : 'Read Guide' ?> &rarr;
                             </span>
                         </div>
                         <div class="article-card-right">
@@ -327,10 +273,7 @@ function encode_data(mixed $value): string {
                         <p class="article-subtitle"><?= htmlspecialchars($subtitle) ?></p>
                         <p class="article-excerpt"><?= htmlspecialchars($excerpt) ?></p>
                         <span class="article-read-link" role="button">
-                            <?= $lang === 'id' ? 'Baca Panduan' : 'Read Guide' ?>
-                            <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                                <path d="M1 6h10M7 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
+                            <?= $lang === 'id' ? 'Baca Panduan' : 'Read Guide' ?> &rarr;
                         </span>
                     <?php endif; ?>
                 </article>
@@ -383,7 +326,7 @@ function encode_data(mixed $value): string {
             <form id="report-form" onsubmit="submitReport(event)">
                 <div style="margin-bottom: 1.25rem;">
                     <label style="display: block; font-weight: 600; margin-bottom: 0.5rem;"><?= $content['report']['form']['category']['label'] ?></label>
-                    <select name="category" required style="width: 100%; padding: 10px; border: 1px solid #d1d5db; border-radius: 4px;">
+                    <select name="category" required style="width: 100%; padding: 12px; border: 1px solid #d1d5db; border-radius: 4px;">
                         <option value="">Select category...</option>
                         <?php foreach ($content['report']['form']['category']['options'] as $opt): ?>
                             <option value="<?= $opt ?>"><?= $opt ?></option>
@@ -393,7 +336,7 @@ function encode_data(mixed $value): string {
 
                 <div style="margin-bottom: 1.25rem;">
                     <label style="display: block; font-weight: 600; margin-bottom: 0.5rem;"><?= $content['report']['form']['role']['label'] ?></label>
-                    <select name="role" required style="width: 100%; padding: 10px; border: 1px solid #d1d5db; border-radius: 4px;">
+                    <select name="role" required style="width: 100%; padding: 12px; border: 1px solid #d1d5db; border-radius: 4px;">
                         <option value="">Select role...</option>
                         <?php foreach ($content['report']['form']['role']['options'] as $opt): ?>
                             <option value="<?= $opt ?>"><?= $opt ?></option>
@@ -403,27 +346,49 @@ function encode_data(mixed $value): string {
 
                 <div style="margin-bottom: 1.25rem;">
                     <label style="display: block; font-weight: 600; margin-bottom: 0.5rem;">Incident Details</label>
-                    <textarea name="description" rows="4" required style="width: 100%; padding: 10px; border: 1px solid #d1d5db; border-radius: 4px;"></textarea>
+                    <textarea name="description" rows="4" required style="width: 100%; padding: 12px; border: 1px solid #d1d5db; border-radius: 4px;" placeholder="Describe what happened..."></textarea>
                 </div>
 
-                <button type="submit" style="background: var(--color-accent, #b91c1c); color: #fff; border: none; padding: 12px 24px; border-radius: 4px; font-weight: 600; cursor: pointer; width: 100%;">
+                <button type="submit" style="background: var(--color-accent, #b91c1c); color: #fff; border: none; padding: 14px 28px; border-radius: 4px; font-weight: 600; cursor: pointer; width: 100%;">
                     <?= $content['report']['form']['submit'] ?>
                 </button>
             </form>
 
-            <div id="report-result" style="display: none; text-align: center; padding: 1rem;">
-                <h3 style="color: #16a34a; font-size: 1.5rem; margin-bottom: 0.5rem;">Report Submitted Successfully</h3>
-                <p>Your unique reference ID is:</p>
-                <div id="res-ref" style="font-weight: 700; font-size: 1.25rem; font-family: monospace; background: #f3f4f6; padding: 8px; margin: 1rem 0; border-radius: 4px;"></div>
-                <p style="font-size: 0.85rem; color: #6b7280;">Save this ID to track your report status anytime.</p>
+            <div id="report-result" style="display: none; text-align: center; padding: 2rem 0;">
+                <h3 style="color: #16a34a; font-size: 1.75rem; margin-bottom: 0.5rem;">Report Submitted Successfully</h3>
+                <p>Your unique reference ID:</p>
+                <div id="res-ref" style="font-weight: 700; font-size: 1.25rem; font-family: monospace; background: #f3f4f6; padding: 10px; margin: 1rem 0; border-radius: 4px; display:inline-block;"></div>
+                <p style="font-size: 0.9rem; color: #6b7280; margin-bottom: 1.5rem;">Save this ID. You can track your ticket status below or in the Track Ticket section.</p>
+                <div>
+                    <button onclick="resetReportForm()" style="background: #000; color: #fff; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer;">Submit Another Report</button>
+                </div>
             </div>
         </div>
     </div>
 </section>
 
 
+<!-- TRACK TICKET SECTION -->
+<section id="track" class="section">
+    <div class="container" style="max-width: 800px;">
+        <div style="text-align: center; margin-bottom: 2rem;">
+            <h2 class="advocacy-heading" style="font-size: 2.5rem;">Track Your Ticket</h2>
+            <p class="advocacy-subtitle" style="margin-top: 0.5rem;">Enter your reference ID to check the current status of your report.</p>
+        </div>
+
+        <div style="background: #fff; padding: 2.5rem; border-radius: 8px; border: 1px solid #e5e7eb;">
+            <form onsubmit="trackTicket(event)" style="display: flex; gap: 1rem; margin-bottom: 1.5rem;">
+                <input type="text" id="track-input" required placeholder="e.g. BRITAKAN-A1B2C3" style="flex: 1; padding: 12px; border: 1px solid #d1d5db; border-radius: 4px;">
+                <button type="submit" style="background: #000; color: #fff; border: none; padding: 12px 24px; border-radius: 4px; font-weight: 600; cursor: pointer;">Check Status</button>
+            </form>
+            <div id="track-output" style="padding: 1rem; border-radius: 4px; display: none;"></div>
+        </div>
+    </div>
+</section>
+
+
 <!-- RESOURCES -->
-<section id="resources" class="section">
+<section id="resources" class="section section-alt">
     <div class="container">
         <div class="advocacy-header reveal">
             <div>
@@ -446,7 +411,7 @@ function encode_data(mixed $value): string {
 
 
 <!-- CONTACT -->
-<section id="contact" class="section section-alt">
+<section id="contact" class="section">
     <div class="container" style="max-width: 800px;">
         <div style="text-align: center; margin-bottom: 3rem;">
             <h2 class="advocacy-heading" style="font-size: 2.5rem;"><?= $content['contact']['heading'] ?></h2>
@@ -522,20 +487,73 @@ function encode_data(mixed $value): string {
 
 <script src="/assets/js/main.js" defer></script>
 <script>
+    // Client-side report storage using localStorage for seamless demo
     function submitReport(e) {
         e.preventDefault();
-        const formData = new FormData(e.target);
-        formData.append('action', 'submit_report');
+        const category = e.target.category.value;
+        const role = e.target.role.value;
+        const description = e.target.description.value;
 
-        fetch('', { method: 'POST', body: formData })
-            .then(res => res.json())
-            .then(data => {
-                if (data.success) {
-                    document.getElementById('report-form').style.display = 'none';
-                    document.getElementById('res-ref').innerText = data.ref_id;
-                    document.getElementById('report-result').style.display = 'block';
-                }
-            });
+        const refId = 'BRITAKAN-' + Math.random().toString(36).substring(2, 8).toUpperCase();
+        const newReport = {
+            id: Date.now(),
+            reference_id: refId,
+            category: category,
+            role: role,
+            description: description,
+            status: 'Received',
+            created_at: new Date().toISOString().slice(0, 19).replace('T', ' ')
+        };
+
+        let reports = JSON.parse(localStorage.getItem('britakan_reports') || '[]');
+        reports.unshift(newReport);
+        localStorage.setItem('britakan_reports', JSON.stringify(reports));
+
+        document.getElementById('report-form').style.display = 'none';
+        document.getElementById('res-ref').innerText = refId;
+        document.getElementById('report-result').style.display = 'block';
+    }
+
+    function resetReportForm() {
+        document.getElementById('report-form').reset();
+        document.getElementById('report-form').style.display = 'block';
+        document.getElementById('report-result').style.display = 'none';
+    }
+
+    function trackTicket(e) {
+        e.preventDefault();
+        const refId = document.getElementById('track-input').value.trim().toUpperCase();
+        let reports = JSON.parse(localStorage.getItem('britakan_reports') || '[]');
+        
+        // Add sample default report if empty
+        if (reports.length === 0) {
+            reports = [{
+                reference_id: 'BRITAKAN-DEMO',
+                category: 'Bullying',
+                role: 'I experienced the incident',
+                description: 'Sample demo report.',
+                status: 'Initial Review',
+                created_at: '2026-10-28 12:00:00'
+            }];
+            localStorage.setItem('britakan_reports', JSON.stringify(reports));
+        }
+
+        const found = reports.find(r => r.reference_id === refId);
+        const out = document.getElementById('track-output');
+        out.style.display = 'block';
+
+        if (found) {
+            out.style.background = '#f0fdf4';
+            out.style.border = '1px solid #bbf7d0';
+            out.innerHTML = `<strong>Ticket Found:</strong> ${found.reference_id}<br>
+                             <strong>Category:</strong> ${found.category}<br>
+                             <strong>Status:</strong> <span style="color:#16a34a; font-weight:700;">${found.status}</span><br>
+                             <small style="color:#6b7280;">Submitted on: ${found.created_at}</small>`;
+        } else {
+            out.style.background = '#fef2f2';
+            out.style.border = '1px solid #fecaca';
+            out.innerHTML = `<span style="color:#dc2626;">Ticket ID not found. Please check your reference ID.</span>`;
+        }
     }
 </script>
 </body>
