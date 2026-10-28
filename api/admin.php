@@ -104,13 +104,13 @@ if ($isLoggedIn && $pdo) {
                 <form method="POST">
                     <div style="margin-bottom: 1rem;">
                         <label for="admin-username">Username</label>
-                        <input type="text" id="admin-username" name="username" autocomplete="username" required style="width: 100%; padding: 10px; margin-top: 4px;">
+                        <input type="text" id="admin-username" name="username" value="admin" autocomplete="username" required style="width: 100%; padding: 10px; margin-top: 4px;">
                     </div>
                     <div style="margin-bottom: 1.5rem;">
                         <label for="admin-password">Password</label>
                         <input type="password" id="admin-password" name="password" autocomplete="current-password" required style="width: 100%; padding: 10px; margin-top: 4px;">
                     </div>
-                    <button type="submit" name="login" style="width: 100%; background: #b91c1c; color: #fff; padding: 12px; border: none; border-radius: 4px; font-weight: 600; cursor: pointer;">Login Dashboard</button>
+                    <button type="submit" name="login" value="1" style="width: 100%; background: #b91c1c; color: #fff; padding: 12px; border: none; border-radius: 4px; font-weight: 600; cursor: pointer;">Login Dashboard</button>
                 </form>
                 <div style="margin-top: 1rem; font-size: 0.8rem; color: #64748b; text-align: center;">
                     Default login: <code>admin</code> / <code>britakan2026</code>
