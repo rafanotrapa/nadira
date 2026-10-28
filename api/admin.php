@@ -1,13 +1,13 @@
 <?php
 /**
- * admin/index.php — Secure Admin Dashboard
+ * api/admin.php — Secure Admin Dashboard
  * BRITAKAN Platform
  */
 
 declare(strict_types=1);
 
 session_start();
-require_once __DIR__ . '/../api/db.php';
+require_once __DIR__ . '/db.php';
 
 // Handle login submission
 $error = '';
@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
         if ($admin && password_verify($password, $admin['password_hash'])) {
             $_SESSION['admin_logged_in'] = true;
             $_SESSION['admin_user'] = $admin['username'];
-            header('Location: /admin/');
+            header('Location: /admin');
             exit;
         } else {
             $error = 'Username atau password salah.';
@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
 // Handle logout
 if (isset($_GET['logout'])) {
     session_destroy();
-    header('Location: /admin/');
+    header('Location: /admin');
     exit;
 }
 
@@ -45,7 +45,7 @@ if (isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'] === true
     if ($pdo) {
         $stmt = $pdo->prepare("UPDATE reports SET status = ? WHERE id = ?");
         $stmt->execute([$newStatus, $reportId]);
-        header('Location: /admin/');
+        header('Location: /admin');
         exit;
     }
 }
@@ -93,7 +93,7 @@ if ($isLoggedIn && $pdo) {
 </nav>
 
 <div class="admin-wrap" style="margin-top: calc(var(--nav-height) + 2rem);">
-    <?php if (!isLoggedIn): ?>
+    <?php if (!$isLoggedIn): ?>
         <div style="max-width: 400px; margin: 4rem auto;">
             <div class="admin-card">
                 <h2 style="font-size: 1.75rem; margin-bottom: 1.5rem; font-family: var(--font-display);">Admin Login</h2>
